@@ -9,6 +9,8 @@
 "  for MS-DOS and Win32:  $VIM\_vimrc
 "	    for OpenVMS:  sys$login:.vimrc
 
+let lisp_rainbow = 1
+
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
@@ -18,6 +20,11 @@ endif
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+set hidden
+set tabstop=4
+set shiftwidth=4
+set nobackup		" do not keep a backup file, use versions instead
+
 " vunbleを有効にするための設定
 filetype off
 
@@ -25,17 +32,13 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+Bundle 'vimgdb'
 
 filetype plugin indent on
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
